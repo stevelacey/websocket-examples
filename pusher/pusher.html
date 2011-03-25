@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <title>Pusher Test</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
+  <script type="text/javascript" src="http://js.pusherapp.com/1.7/pusher.min.js"></script>
+  <script type="text/javascript">
+	$(function() {
+		var pusher = new Pusher('773bd91d797380922fd1');
+		var channel = pusher.subscribe('test_channel');
+		
+		channel.bind('my_event', function(data) {
+			$('body').append(
+				$('<p/>', {text: data})
+			);
+		});
+	});
+  </script>
+</head>
+<body>
+</body>
+</html>

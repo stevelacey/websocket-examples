@@ -1,0 +1,8 @@
+div {
+  height: 400px;
+  overflow: auto;
+}
+
+input[type="text"] {
+  width: 400px;
+}
