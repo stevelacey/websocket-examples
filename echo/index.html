@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
   <head>
-    <title>Websocket Server Date Test</title>
+    <title>WebSocket Test</title>
     <script language="javascript" type="text/javascript">
 
-    var wsUri = "ws://i7.stevelacey.net:8000";
+    var wsUri = "ws://echo.websocket.org";
     var output;
 
     function init() {
@@ -18,10 +18,14 @@
       websocket.onclose = function(evt) { onClose(evt) };
       websocket.onmessage = function(evt) { onMessage(evt) };
       websocket.onerror = function(evt) { onError(evt) };
+      setInterval(doClose, 2000);
     }
 
     function onOpen(evt) {
       writeToScreen("CONNECTED");
+      doSend("WebSocket rocks");
+      doSend("a lot");
+      doSend("seriously.");
     }
 
     function onClose(evt) {
@@ -30,11 +34,19 @@
 
     function onMessage(evt) {
       writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'<\/span>');
-      //websocket.close();
     }
 
     function onError(evt) {
     	writeToScreen('<span style="color: red;">ERROR:<\/span> ' + evt.data);
+    }
+
+    function doSend(message) {
+      writeToScreen("SENT: " + message);
+      websocket.send(message);
+    }
+
+    function doClose() {
+      websocket.close();
     }
 
     function writeToScreen(message) {
@@ -46,10 +58,11 @@
 
     window.addEventListener("load", init, false);
 
+
     </script>
   </head>
   <body>
-    <h1>Websocket Server Date Test</h1>
+    <h2>WebSocket Test</h2>
     <div id="output"></div>
   </body>
 </html>

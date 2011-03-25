@@ -1,6 +1,7 @@
-var	ws = require("websocket-server");
-var util = require("util");
-var socket;
+var	ws = require("websocket-server"),
+    util = require("util"),
+    port = 8082,
+    socket;
 
 /**
  * Initialises server-side functionality
@@ -16,17 +17,12 @@ function init() {
 		// This listener is being called without causing any crashes. Good!
 		client._req.socket.removeAllListeners("error");
 		client._req.socket.on("error", function(err) {
-			util.log("Socket error 1: "+err);
+			util.log("Socket error 1: " + err);
 		});
 
 		util.log("CONNECT: "+client.id);
 
     pushTime();
-    
-		// On incoming message from client
-		client.on("message", function(msg) {
-      socket.broadcast('Yeah, I know.');
-		});
 
 		// On client disconnect
 		client.on("close", function(){
@@ -35,13 +31,16 @@ function init() {
 	});
 
 	// Start listening for WebSocket connections
-	socket.listen(8000);
-	util.log("Server listening on port 8000");
+	socket.listen(port);
+	util.log("Server listening on port" + port);
 };
 
 function pushTime() {
   var now = new Date();
-  socket.broadcast(now.toString());
+
+  socket.clients.each(function(client){
+    client.write(conn._id + ": "+ now.toString());
+  });
   
   setTimeout(pushTime, 2000);
 }

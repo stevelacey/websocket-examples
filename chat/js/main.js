@@ -1,5 +1,5 @@
 function init() {
-  websocket = new WebSocket("ws://i7.stevelacey.net:8000");
+  websocket = new WebSocket("ws://websockets.stevelacey.net:8081");
   websocket.onopen = function(event) { onOpen(event) };
   websocket.onclose = function(event) { onClose(event) };
   websocket.onmessage = function(event) { onMessage(event) };
@@ -44,6 +44,6 @@ $(document).ready(function() {
 
     message.focus();
   });
-});
 
-window.addEventListener("load", init, false);
+  init();
+});

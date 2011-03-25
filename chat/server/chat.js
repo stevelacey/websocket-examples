@@ -1,6 +1,7 @@
-var	ws = require("websocket-server");
-var util = require("util");
-var socket;
+var	ws = require("websocket-server"),
+    util = require("util"),
+    port = 8081,
+    socket;
 
 /**
  * Initialises server-side functionality
@@ -33,8 +34,8 @@ function init() {
 	});
 
 	// Start listening for WebSocket connections
-	socket.listen(8000);
-	util.log("Server listening on port 8000");
+	socket.listen(port);
+	util.log("Server listening on port " + port);
 };
 
 function pushTime() {
