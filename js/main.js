@@ -15,8 +15,8 @@ $(function() {
     'hideOnContentClick': false
   });
 
-  if(!'WebSocket' in window) {
-    $('#examples h2').after($('<p/>', {
+  if(!Modernizr.websockets) {
+    $('#action h2, #examples h2').after($('<p/>', {
       'html': 'Oh no, you need a browser that supports WebSockets. How about <a href="http://www.google.com/chrome">Google Chrome</a>?',
       'class': 'warning'
     }));
