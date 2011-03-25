@@ -2,11 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Websockets</title>
+    <title>WebSockets</title>
     <link rel="stylesheet" type="text/css" href="css/global.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.fancybox-1.3.4.css"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.scrollTo-1.4.2-min.js"></script>
     <script type="text/javascript" src="js/jquery.localscroll-1.2.7-min.js"></script>
     <script type="text/javascript" src="js/jquery.easing-1.3.pack.js"></script>
@@ -19,22 +20,25 @@
     </div>
 
     <div class="report">
-      <h1>Websockets</h1>
+      <h1>WebSockets</h1>
 
       <ul class="nav">
         <li><a href="#introduction">Introduction</a></li>
         <li><a href="#relevance">Relevance</a></li>
-        <li><a href="#features">Features</a></li>
+        <li><a href="#javascript-api">JavaScript API</a></li>
+        <li><a href="#protocol">Protocol</a></li>
         <li><a href="#advantages">Advantages</a></li>
         <li><a href="#disadvantages">Disadvantages</a></li>
-        <li><a href="#evaluation">Evaluation</a></li>
+        <li><a href="#action">WebSockets in Action</a></li>
         <li><a href="#examples">Examples</a></li>
+        <li><a href="#evaluation">Evaluation</a></li>
         <li><a href="#references">References</a></li>
       </ul>
 
       <div id="introduction">
         <h2>Introduction</h2>
-        <p></p>
+        <p>The WebSocket specification defines TCP for the web browser and they are one of the most underappreciated innovations in the HTML5 specification. The benefits of the newly introduced WebSocket API are for most part invisible to the end-user, but as developers over the course of the last decade we have invented dozens of technologies to try and solve the problem of achieving asynchronous and bi-directional communication between web-browsers and servers. Asynchronous JavaScript and XML (AJAX), HTTP Streaming and Flash sockets to name a few; all have weaknesses, that eventually boil down to the simple fact that web browsers were not designed for bi-directional communication.</p>
+        <p>Until now that is, WebSockets are different to these technologies of the past because they were designed from the very beginning to support full-duplex communication. Only a single connection is required; which has a massive impact reducing bandwidth consumption and resources utilisation for both clients and servers, allowing us to communicate both quicker and more efficiently. Additionally, the WebSocket protocol was also developed with existing technology in mind. WebSockets can be used over SSL, through proxies, firewalls and utilises the HTTP channel, meaning that existing technology in place such as routers, proxies and load balancers should operate as normal.</p>
       </div>
 
       <div id="relevance">
@@ -42,8 +46,14 @@
         <p></p>
       </div>
 
-      <div id="features">
-        <h2>Features</h2>
+      <div id="javascript-api">
+        <h2>JavaScript API</h2>
+        <img src="images/events.png" alt="WebSocket Events" title="WebSocket Events"/>
+        <p></p>
+      </div>
+
+      <div id="protocol">
+        <h2>Protocol</h2>
         <p></p>
       </div>
 
@@ -57,9 +67,26 @@
         <p></p>
       </div>
 
-      <div id="evaluation">
-        <h2>Evaluation</h2>
-        <p></p>
+      <div id="action">
+        <h2>WebSockets in Action</h2>
+        <ul>
+          <li>
+            <h3><a href="http://mrdoob.com/projects/multiuserpad">Multiuser Sketchpad</a></h3>
+            <p>A shared sketchpad that everyone can draw on at the same time. WebSockets are used to keep up with the position data shared between users.</p>
+          </li>
+          <li>
+            <h3><a href="http://www.rawkets.com">Rawkets</a></h3>
+            <p>A massively multiplayer game in which you can shoot and interact with other players, in real-time, in space! It uses the latest Web technologies, including HTML5 canvas and WebSockets.</p>
+          </li>
+          <li>
+            <h3><a href="http://rumpetroll.com">Rumpetroll</a></h3>
+            <p>A massively multiplayer experiment done in HTML5/Canvas/JavaScript and magical WebSockets. Rumpetroll is Norwegian, but probably not what you think.</p>
+          </li>
+          <li>
+            <h3><a href="http://wordsquared.com">WordSquared</a></h3>
+            <p>A massively multiplayer online Scrabble-like word game.</p>
+          </li>
+        </ul>
       </div>
 
       <div id="examples">
@@ -67,7 +94,7 @@
         <ul>
           <li>
             <a href="chat">Chat</a>
-            <p>A basic anonymous multi-user chat relay via websockets.</p>
+            <p>A basic anonymous multi-user chat relay via WebSockets.</p>
           </li>
           <li>
             <a href="date">Date</a>
@@ -78,6 +105,11 @@
             <p>An echo responder.</p>
           </li>
         </ul>
+      </div>
+
+      <div id="evaluation">
+        <h2>Evaluation</h2>
+        <p></p>
       </div>
 
       <div id="references">

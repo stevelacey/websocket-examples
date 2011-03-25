@@ -22,5 +22,9 @@ $(function() {
     }));
   }
 
-  $.localScroll();
+  $.localScroll({speed: 300});
+
+  $(".nav a").click(function(event) {
+    $($(this).attr("href")).effect("highlight", {color: "orange"}, 1000);
+  });
 });

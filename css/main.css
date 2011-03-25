@@ -1,9 +1,17 @@
 @charset "utf-8";
 
 body {
-  width: 960px;
+  width: 70%;
+  max-width: 960px;
   margin: 0 auto;
   font-family: verdana, arial, helvetica, sans-serif;
+}
+
+body, .report img {
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 h1 {
@@ -17,7 +25,23 @@ code {
   border: solid 1px #aaa;
   margin: 0 30px 0 0px;
   padding: 10px;
-  font-size: 0.9em;
+}
+
+img {
+  float: right;
+  margin: 0 0 20px 20px;
+  max-width: 50%;
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 90%;
+  }
+
+  img {
+    max-width: 100%;
+    margin-left: 0;
+  }
 }
 
 .header {
@@ -35,7 +59,20 @@ code {
 
 .nav li {
   display: inline;
-  padding: 5px 8px 5px 0;
+  margin: 5px 10px 5px 0;
+}
+
+.report ul {
+  margin: 1em 0;
+}
+
+.report ul li {
+  padding: 0.5em 0;
+}
+
+.report ul li h3, .report ul li p {
+  margin: 0;
+  font-style: normal;
 }
 
 .warning {
@@ -43,4 +80,25 @@ code {
   border: 1px solid;
   color: #9F6000;
   padding: 5px;
+}
+
+/* float clearing for IE6 */
+* html .report div {
+  height: 1%;
+  overflow: visible;
+}
+
+/* float clearing for IE7 */
+*+html .report div {
+  min-height: 1%;
+}
+
+/* float clearing for everyone else */
+.report div:after{
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  font-size: 0;
 }
