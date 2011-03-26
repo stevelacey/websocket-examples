@@ -3,40 +3,29 @@ var	ws = require("websocket-server"),
     port = 8081,
     socket;
 
-/**
- * Initialises server-side functionality
- */
-function init() {
-	// Initialise WebSocket server
-	//socket = ws.createServer({debug: true});
-	socket = ws.createServer();
+// Initialise WebSocket server
+socket = ws.createServer();
 
-	// On incoming connection from client
-	socket.on("connection", function(client) {
-		// Attempt to fix ECONNRESET errors
-		// This listener is being called without causing any crashes. Good!
-		client._req.socket.removeAllListeners("error");
-		client._req.socket.on("error", function(err) {
-			util.log("Socket error 1: "+err);
-		});
+// On incoming connection from client
+socket.on("connection", function(client) {
+  broadcast(client, "[User Connected]");
 
-		util.log("CONNECT: "+client.id);
+  // On incoming message from client
+  client.on("message", function(message) {
+    broadcast(client, message);
+  });
 
-		// On incoming message from client
-		client.on("message", function(msg) {
-      client.broadcast(msg);
-		});
+  // On client disconnect
+  client.on("close", function(){
+    broadcast(client, "[User Disconnected]");
+  });
+});
 
-		// On client disconnect
-		client.on("close", function(){
-			util.log("CLOSE: "+client.id);
-		});
-	});
+function broadcast(client, message) {
+  client.broadcast(message);
+  util.log(client.id + ': ' + message);
+}
 
-	// Start listening for WebSocket connections
-	socket.listen(port);
-	util.log("Server listening on port " + port);
-};
-
-// Initialise the server-side functionality
-init();
+// Start listening for WebSocket connections
+socket.listen(port);
+util.log("Server listening on port " + port);
