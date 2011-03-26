@@ -15,7 +15,10 @@ body, .report img {
 }
 
 h1 {
+  display: inline;
+  background: url("../images/websockets.png") center right no-repeat;
   margin: 0.5em 0;
+  padding-right: 60px;
   font-size: 48px;
 }
 
