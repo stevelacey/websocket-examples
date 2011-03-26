@@ -30,7 +30,7 @@ function init() {
 
 	// Start listening for WebSocket connections
 	socket.listen(port);
-	util.log("Server listening on port" + port);
+	util.log("Server listening on port " + port);
 
   pushTime();
 };
