@@ -24,7 +24,7 @@ function init() {
 
 		// On incoming message from client
 		client.on("message", function(msg) {
-      socket.broadcast(msg);
+      client.broadcast(msg);
 		});
 
 		// On client disconnect
