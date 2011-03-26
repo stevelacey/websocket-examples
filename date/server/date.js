@@ -22,8 +22,6 @@ function init() {
 
 		util.log("CONNECT: "+client.id);
 
-    pushTime();
-
 		// On client disconnect
 		client.on("close", function(){
 			util.log("CLOSE: "+client.id);
@@ -33,16 +31,15 @@ function init() {
 	// Start listening for WebSocket connections
 	socket.listen(port);
 	util.log("Server listening on port" + port);
+
+  pushTime();
 };
 
 function pushTime() {
   var now = new Date();
+  socket.broadcast(now.toString());
 
-  socket.clients.each(function(client){
-    client.write(conn._id + ": "+ now.toString());
-  });
-  
-  setTimeout(pushTime, 2000);
+  setTimeout(pushTime, 1000);
 }
 
 // Initialise the server-side functionality

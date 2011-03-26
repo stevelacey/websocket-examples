@@ -38,12 +38,5 @@ function init() {
 	util.log("Server listening on port " + port);
 };
 
-function pushTime() {
-  var now = new Date();
-  socket.broadcast(now.toString());
-  
-  setTimeout(pushTime, 2000);
-}
-
 // Initialise the server-side functionality
 init();
