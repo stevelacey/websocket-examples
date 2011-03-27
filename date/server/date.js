@@ -20,7 +20,6 @@ socket.on("connection", function(client) {
 socket.listen(port);
 util.log("Server listening on port " + port);
 
-
 // Push out current server time every second
 function pushTime() {
   var now = new Date();
