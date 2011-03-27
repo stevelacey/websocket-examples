@@ -15,22 +15,36 @@ body, .report img {
   transition: all 0.2s ease-in-out;
 }
 
+a img {
+  border: 0;
+}
+
 blockquote {
+  margin: 0;
+}
+
+blockquote p {
   border-left: 6px solid #e6c7a3;
   margin: 0;
   padding: 0 10px;
 }
 
-blockquote p {
-  margin-top: 0;
+blockquote div {
+  text-align: right;
 }
 
-blockquote .cite {
+blockquote cite {
+  color: #BBB;
   font-size: 12px;
+  font-style: normal;
 }
 
-cite {
-  font-style: normal;
+blockquote cite:before {
+  content: " - ";
+}
+
+blockquote cite a {
+  color: #795328;
 }
 
 code {
@@ -49,7 +63,7 @@ code {
 
 h1 {
   display: inline;
-  background: url("../images/websockets.png") center right no-repeat;
+  background: url("../images/websocket-logo.png") center right no-repeat;
   margin: 0.5em 0;
   padding-right: 60px;
   font-size: 48px;
@@ -102,9 +116,12 @@ pre, tt, code {
   margin: 1em 0;
 }
 
-.report #action ul li,
-.report #examples ul li {
+.report ul li {
   padding: 0.5em 0;
+}
+
+.report #server-side ul li {
+  padding: 0;
 }
 
 .report ul li h3, .report ul li p {

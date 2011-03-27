@@ -43,21 +43,29 @@
 
       <div id="relevance">
         <h2>Relevance to the World Wide Web</h2>
-        <p></p>
+
+        <p>The relevance of this technology to the web as we know it is astounding. By having bi-directional communication between browsers and servers, we can push real-time data at our users and to quote the HTML5 specification lead (and Google employee) Ian Hickson:</p>
+
+        <blockquote title="Ian Hickson">
+          <p>Reducing kilobytes of data to 2 bytes…and reducing latency from 150ms to 50ms is far more than marginal. In fact, these two factors alone are enough to make Web Sockets seriously interesting to Google.</p>
+          <div><cite><a href="http://websocket.org/quantum.html">Ian Hickson</a></cite></div>
+        </blockquote>
+
+        <p>With WebSockets we can build applications that react to the world around them in a fraction of the time previously possible and with the significant latency improvements by removing unnecessary overheads and polling- and when combined with <a href="http://dev.w3.org/html5/2dcontext">Canvas</a> and <a href="http://www.khronos.org/registry/webgl/specs/latest">WebGL</a>; a whole new generation of massively multiplayer games are on the horizon.</p>
       </div>
 
       <div id="javascript-api">
         <h2>JavaScript API</h2>
-        <img src="images/events.png" alt="WebSocket Events" title="WebSocket Events"/>
+        
+        <a href="http://net.tutsplus.com/tutorials/javascript-ajax/start-using-html5-websockets-today">
+          <img src="images/events.png" alt="WebSocket Events" title="WebSocket Events"/>
+        </a>
 
         <p>The <a href="http://dev.w3.org/html5/websockets">WebSocket API</a> is still a draft, but the major modern browsers have already implemented most of the functionality, and even Microsoft has a <a href="http://blogs.msdn.com/b/interoperability/archive/2010/12/21/introducing-the-websockets-prototype.aspx">prototype implementation in the works for Internet Explorer</a>.</p>
         
         <blockquote cite="http://dev.w3.org/html5/websockets" title="The WebSocket API Editor's Draft">
           <p>This specification defines an API that enables Web pages to use the WebSocket protocol for two-way communication with a remote host.</p>
-          <div class="cite">
-            This quotation was taken on 24th March 2011 from
-            <cite><a href="http://dev.w3.org/html5/websockets">The WebSocket API Editor's Draft</a>.</cite>
-          </div>
+          <div><cite><a href="http://dev.w3.org/html5/websockets">The WebSocket API Editor's Draft</a></cite></div>
         </blockquote>
 
         <p>The JavaScript added as part of the HTML5 specification allows for fairly simple use of the WebSocket protocol by developers. Amongst read-only connection details such as 'url', 'protocol' and 'readyState' the WebSocket interface defines four event handlers and two methods:</p>
@@ -103,26 +111,21 @@ websocket.onmessage = function(event) {
 
       <div id="server-side">
         <h2>Server-Side</h2>
-        <p>WebSocket servers are also relatively simple to set up. There is a vast collection of libraries, frameworks and even some native support divning languages including:</p>
+        <p>WebSocket servers are also relatively simple to set up. There is a vast collection of libraries, frameworks and even some native support spanning languages including:</p>
 
         <ul>
-          <li>C</li>
-          <li>Java</li>
-          <li>Node</li>
-          <li>PHP</li>
-          <li>Python</li>
-          <li>Ruby</li>
+          <li><a href="http://jwebsocket.org">Java</a></li>
+          <li><a href="http://static.brandedcode.com/nws-docs">Node</a></li>
+          <li><a href="http://code.google.com/p/phpwebsocket">PHP</a></li>
+          <li><a href="https://github.com/mtah/python-websocket">Python</a></li>
+          <li><a href="https://github.com/igrigorik/em-websocket">Ruby</a></li>
         </ul>
 
         <p>Having some experience with Node.js and finding Ruby syntax somewhat difficult to grasp, for my prototypes I chose to make use of the <a href="http://static.brandedcode.com/nws-docs">Node WebSocket Server</a> package by <a href="http://brandedcode.com">Micheil Smith</a>.</p>
 
         <blockquote cite="http://static.brandedcode.com/nws-docs" title="Node WebSocket Server">
           <p>Node WebSocket Server is a near specification compliant implementation of the server-side <a href="http://static.brandedcode.com/nws-docs">WebSocket Protocol</a>. It is built on top of <a href="http://nodejs.org">Node.js</a> as a third-party module, and is designed to support various versions of the WebSocket protocol – which is currently still an IETF Draft.</p>
-
-          <div class="cite">
-            This quotation was taken on 26th March 2011 from
-            <cite><a href="http://static.brandedcode.com/nws-docs">Node WebSocket Server</a>.</cite>
-          </div>
+          <div><cite><a href="http://static.brandedcode.com/nws-docs">Node WebSocket Server</a></cite></div>
         </blockquote>
 
         <p>The server's main roles amongst other things are to accept (or reject) clients, maintain a unique identifier for each connection and to listen for and broadcast messages, the core concept being in to manage the rapid exchange of data between nodes.</p>
@@ -130,7 +133,14 @@ websocket.onmessage = function(event) {
 
       <div id="protocol">
         <h2>Protocol</h2>
-        <p></p>
+
+        <a href="http://warmcat.com/_wp/2010/11/01/libwebsockets-html5-websocket-server-library-in-c">
+          <img src="images/websocket-lifecycle.png" alt="WebSocket Lifecycle" title="WebSocket Lifecycle"/>
+        </a>
+
+        <p>When loading a webpage geared for WebSocket interactions, initially, a standard HTTP connection is used, to load the mark-up, styling and JavaScript. The JavaScript then sends a HTTP request asking to upgrade to use the WebSocket protocol, passing along some keys. After a complex handshake that ensures both sides fully support WebSocket- the server sends a HTTP response returning more keys and confirming the connection. This handshake is for the most part handled internally by the WebSocket JavaScript API, and once it is complete, the full power of the protocol is unleashed.</p>
+        <p>Once the connection is established there is no HTTP header overhead on each packet, as mentioned for UTF-8 the protocol overhead is only two bytes per packet.  Additionally, there's no huge XML encode / decode overhead either, so this is a great transport for low-latency data like gaming player positioning updates or speech.</p>
+        <p>Whilst mainstream adoption of the protocol amongst modern browser vendors has been great, recent discoveries found that the WebSocket protocol is vulnerable to attacks. Adam Barth <a href="http://www.ietf.org/mail-archive/web/hybi/current/msg04744.html">demonstrated some serious attacks against the protocol</a> that could be used by an attacker to poison caches that sit in between the browser and the Internet. As a result of this, major vendors including <a href="http://hacks.mozilla.org/2010/12/websockets-disabled-in-firefox-4">Mozilla and Opera disabled WebSockets functionality by default</a> to protect users until the protocol is fixed. However, at the time of writing, the protocol has now been patched and no doubt vendors will implement the changes and re-enable the protocol by default soon.</p>
       </div>
 
       <div id="degradation">
@@ -139,18 +149,44 @@ websocket.onmessage = function(event) {
 
         <blockquote cite="http://remysharp.com/2010/10/08/what-is-a-polyfill" title="What is a Polyfill?">
           <p>A polyfill, or polyfiller, is a piece of code (or plugin) that provides the technology that you, the developer, expect the browser to provide natively. Flattening the API landscape if you will.</p>
-
-          <div class="cite">
-            This quotation was taken on 27th March 2011 from
-            <cite><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill">What is a Polyfill?</a> by <a href="http://remysharp.com">Remy Sharp</a>.</cite>
-          </div>
+          <div><cite><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill">What is a Polyfill?</a> by <a href="http://remysharp.com">Remy Sharp</a></cite></div>
         </blockquote>
 
-        <p>The basic premise being that those who need to degrade this functionality can write or utilise a wrapper library that makes use of the in-built WebSocket functionality when it is available natively, and reverts to one of the techniques designed for the last generation of browsers when it is not; such as long polling or FlashSockets.</p>
+        <p>The basic premise being that those who need to degrade this functionality can write or utilise a wrapper library that makes use of the in-built WebSocket functionality when it is available natively, and reverts to one of the techniques designed for the last generation of browsers; such as long polling or FlashSockets when it is not.</p>
+
+        <p>A few of the <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">fallbacks recommended</a> by <a href="http://paulirish.com">Paul Irish</a> and others include:</p>
+
+        <ul>
+          <li>
+            <a href="http://socket.io">Socket.IO</a>
+            <p>Abstracts API, adds features and utilises the most capable transport runtime, be that being WebSocket, Flash Socket, long polling, multipart streaming, forever iframe or JSONP polling.</p>
+          </li>
+          <li>
+            <a href="http://code.google.com/p/jquery-graceful-websocket">jQuery Graceful Websocket</a>
+            <p>Extends the WebSocket API, degrades to traditional AJAX polling over HTTP.</p>
+          </li>
+          <li>
+            <a href="http://kaazing.com/products/kaazing-websocket-gateway.html">Kaazing WebSocket Gateway</a>
+            <p>Commercial product. pure polyfill.</p>
+          </li>
+          <li>
+            <a href="http://github.com/gimite/web-socket-js">web-socket-js</a>
+            <p>Fallback to Flash Sockets.</p>
+          </li>
+          <li>
+            <a href="http://jfarcand.wordpress.com/2010/06/15/using-atmospheres-jquery-plug-in-to-build-applicationsupporting-both-websocket-and-comet">Atmosphere jQuery Plugin</a>
+            <p>Fallback to comet long-polling.</p>
+          </li>
+        </ul>
+
+        <p>Socket.IO appears to be the most mature of the selection, offering complete abstraction for both client and server-side code, as well as degradation to a wide selection of technologies. Obviously, the fallbacks will be of no match to native WebSocket support- but they are a promising solution for developers who need that backwards compatibility.</p>
       </div>
 
       <div id="action">
         <h2>WebSockets in Action</h2>
+
+        <p>The following websites demonstrate the use of WebSockets in production environments, for a wide range of applications including massively multiplayer gaming, sketching and multiuser synchronising of data.</p>
+
         <ul>
           <li>
             <h3><a href="http://kaazing.me">Kaazing</a></h3>
@@ -185,6 +221,9 @@ websocket.onmessage = function(event) {
 
       <div id="examples">
         <h2>Examples</h2>
+
+        <p>The following examples I have created to demonstrate the basic functionality of WebSockets, they are for the most part written in raw JavaScript with the occasional dash of <a href="http://jquery.com">jQuery</a> and <a href="http://nodejs.org">Node.js</a> server-side. All <a href="https://github.com/stevelacey/websocket-examples">source code is available on Github</a>.</p>
+
         <ul>
           <li>
             <a href="chat">Chat</a>
@@ -199,17 +238,24 @@ websocket.onmessage = function(event) {
             <p>An echo responder.</p>
           </li>
         </ul>
+
+          <p>The 'chat' and 'date' servers reside on port 8081 and 8082 respectively; ports of which are blocked on the UWE campus.</p>
+          <p>The echo example's server is hosted by <a href="http://websocket.org/echo.html">websocket.org</a> on port 80, and should work through the proxy.</p>
+        </p>
       </div>
 
       <div id="evaluation">
         <h2>Evaluation</h2>
-        <p></p>
+        <p>WebSockets represent the next evolution of web communications: a full-duplex, bidirectional communications channel that operates through a single socket over the Web. They provide a true standard that can be used to build scalable, real-time web applications. Eliminating many of the problems associated with previous similar technologies, removing excessive overhead and dramatically reducing complexity of the applications we build.</p>
+        <p>Whilst there are clearly considerations to be made when back-porting the technology to legacy browsers, the tools available to aid this process are ground-breaking. Additionally, the vendor involvement when writing the specification means that they either support it or do not, far gone are the days where these technologies are half-implemented; allowing a relatively simple feature detection and polyfilling process; rather than writing 'hacks' such as those for Internet Explorer CSS bugs as seen in the past.</p>
       </div>
 
       <div id="references">
         <h2>References</h2>
         <ul>
           <li>Hickson, I. (2011) <a href="http://dev.w3.org/html5/websockets"><em>The WebSocket API</em></a> [online]. Available at: <a href="http://dev.w3.org/html5/websockets">http://dev.w3.org/html5/websockets</a> [Accessed 24 March 2011]</li>
+          <li>Irish, P. (2011) <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills"><em>HTML5 Cross Browser Polyfills</em></a> [online]. Available at: <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills</a> [Accessed 27 March 2011]</li>
+          <li>Lubers, P., Greco, F., Kaazing Corporation. (2010) <a href="http://websocket.org/quantum.html"><em>HTML5 Web Sockets: A Quantum Leap in Scalability for the Web</em></a> [online]. Available at: <a href="http://websocket.org/quantum.html">http://websocket.org/quantum.html</a> [Accessed 27 March 2011]</li>
           <li>Sharp, R. (2010) <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill"><em>What is a Polyfill?</em></a> [online]. Available at: <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill">http://remysharp.com/2010/10/08/what-is-a-polyfill</a> [Accessed 27 March 2011]</li>
           <li>Smith, M. (2011) <a href="http://static.brandedcode.com/nws-docs"><em>Node WebSocket Server</em></a> [online]. Available at: <a href="http://static.brandedcode.com/nws-docs">http://static.brandedcode.com/nws-docs</a> [Accessed 26 March 2011]</li>
         </ul>

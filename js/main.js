@@ -1,5 +1,5 @@
 $(function() {
-  $('#examples a').fancybox({
+  $('#examples ul li a').fancybox({
     'width': 700,
     'height': 540,
     'type': 'iframe',
