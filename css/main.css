@@ -83,14 +83,19 @@ pre, tt, code {
 	overflow-y: hidden;  /* hides vertical scroll created by IE */
 }
 
-@media (max-width: 480px) {
+@media (max-width: 800px) {
   body {
     width: 90%;
   }
 
   img {
+    float: left;
     max-width: 100%;
     margin-left: 0;
+  }
+
+  p {
+    clear: both;
   }
 }
 

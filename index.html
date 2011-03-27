@@ -29,16 +29,16 @@
         <li><a href="#javascript-api">JavaScript API</a></li>
         <li><a href="#protocol">Protocol</a></li>
         <li><a href="#degradation">Degradation</a></li>
-        <li><a href="#action">WebSockets in Action</a></li>
         <li><a href="#examples">Examples</a></li>
+        <li><a href="#websockets-in-action">WebSockets in Action</a></li>
         <li><a href="#evaluation">Evaluation</a></li>
         <li><a href="#references">References</a></li>
       </ul>
 
       <div id="introduction">
         <h2>Introduction</h2>
-        <p>The WebSocket specification defines TCP for the web browser and they are one of the most underappreciated innovations in the HTML5 specification. The benefits of the newly introduced WebSocket API are for most part invisible to the end-user, but as developers over the course of the last decade we have invented dozens of technologies to try and solve the problem of achieving asynchronous and bi-directional communication between web-browsers and servers. Asynchronous JavaScript and XML (AJAX), HTTP Streaming and Flash sockets to name a few; all have weaknesses, that eventually boil down to the simple fact that web browsers were not designed for bi-directional communication.</p>
-        <p>Until now that is, WebSockets are different to these technologies of the past because they were designed from the very beginning to support full-duplex communication. Only a single connection is required; which has a massive impact reducing bandwidth consumption and resources utilisation for both clients and servers, allowing us to communicate both quicker and more efficiently. Additionally, the WebSocket protocol was also developed with existing technology in mind. WebSockets can be used over SSL, through proxies, firewalls and utilises the HTTP channel, meaning that existing technology in place such as routers, proxies and load balancers should operate as normal.</p>
+        <p>The WebSocket specification defines TCP for the web browser and they are one of the most underappreciated innovations in HTML5. The benefits of the newly introduced WebSocket API are for most part invisible to the end-user, but as developers over the course of the last decade we have invented dozens of technologies to try and solve the problem of achieving asynchronous and bi-directional communication between web-browsers and servers. Asynchronous JavaScript and XML (AJAX), HTTP Streaming and Flash sockets to name a few; all have weaknesses, that eventually boil down to the simple fact that web browsers were not designed for bi-directional communication.</p>
+        <p>Until now that is, WebSockets are different to these technologies of the past because they were designed from the very beginning to support full-duplex communication. Only a single connection is required; which has a massive impact reducing bandwidth consumption and resource utilisation for both clients and servers, allowing us to communicate both quicker and more efficiently. Additionally, the WebSocket protocol was developed with existing technology in mind. WebSockets can be used over SSL, through proxies, firewalls and utilises the HTTP channel, meaning that existing technology in place such as routers, proxies and load balancers should operate as normal.</p>
       </div>
 
       <div id="relevance">
@@ -51,7 +51,7 @@
           <div><cite><a href="http://websocket.org/quantum.html">Ian Hickson</a></cite></div>
         </blockquote>
 
-        <p>With WebSockets we can build applications that react to the world around them in a fraction of the time previously possible and with the significant latency improvements by removing unnecessary overheads and polling- and when combined with <a href="http://dev.w3.org/html5/2dcontext">Canvas</a> and <a href="http://www.khronos.org/registry/webgl/specs/latest">WebGL</a>; a whole new generation of massively multiplayer games are on the horizon.</p>
+        <p>Now that we have WebSockets we can build applications that react to the world around them in a fraction of the time previously possible. With the significant latency improvements by removing unnecessary overheads and polling- and when combined with <a href="http://dev.w3.org/html5/2dcontext">Canvas</a> and <a href="http://www.khronos.org/registry/webgl/specs/latest">WebGL</a>; a whole new generation of web applications and massively multiplayer games are on the horizon.</p>
       </div>
 
       <div id="javascript-api">
@@ -106,7 +106,7 @@ websocket.onmessage = function(event) {
   console.log(event.data);
 };</code></pre>
         
-        <p>Here, the client attempts to connect to a WebSocket, should the connection be successful, it sends a message to the server. The echo service example simply repeats messages back across the connection, so on receipt of the message, would send the same message back to the client, which would then trigger the 'onmessage' function and print the message out in the console. This example could be built upon as I have shown below by swapping out console logs for DOM alterations; or even further by negotiating the exchange of client messages as a chat application.</p>
+        <p>Here, the client attempts to connect to a WebSocket, should the connection be successful, it sends a message to the server. The echo service example simply repeats messages back across the connection, so on receipt of the message, would send the same message back to the client, which would then trigger the 'onmessage' function and print the message out in the console. This example could be built upon as I have shown below by swapping out console logs for DOM alterations; or even further by negotiating the exchange of client messages as a chat application as shown in <a href="#examples">my examples</a>.</p>
       </div>
 
       <div id="server-side">
@@ -128,7 +128,7 @@ websocket.onmessage = function(event) {
           <div><cite><a href="http://static.brandedcode.com/nws-docs">Node WebSocket Server</a></cite></div>
         </blockquote>
 
-        <p>The server's main roles amongst other things are to accept (or reject) clients, maintain a unique identifier for each connection and to listen for and broadcast messages, the core concept being in to manage the rapid exchange of data between nodes.</p>
+        <p>The server's main roles amongst other things are to accept (or reject) clients, maintain a unique identifier for each connection and to listen for and broadcast messages, the core concept being to manage the rapid exchange of data between nodes.</p>
       </div>
 
       <div id="protocol">
@@ -139,7 +139,7 @@ websocket.onmessage = function(event) {
         </a>
 
         <p>When loading a webpage geared for WebSocket interactions, initially, a standard HTTP connection is used, to load the mark-up, styling and JavaScript. The JavaScript then sends a HTTP request asking to upgrade to use the WebSocket protocol, passing along some keys. After a complex handshake that ensures both sides fully support WebSocket- the server sends a HTTP response returning more keys and confirming the connection. This handshake is for the most part handled internally by the WebSocket JavaScript API, and once it is complete, the full power of the protocol is unleashed.</p>
-        <p>Once the connection is established there is no HTTP header overhead on each packet, as mentioned for UTF-8 the protocol overhead is only two bytes per packet.  Additionally, there's no huge XML encode / decode overhead either, so this is a great transport for low-latency data like gaming player positioning updates or speech.</p>
+        <p>Once the connection is established there is no HTTP header overhead on each packet, the protocol overhead is in fact only two bytes per packet.  Additionally, there's no huge XML encode / decode overhead either, so this is a great transport for low-latency data like gaming player positioning updates or speech.</p>
         <p>Whilst mainstream adoption of the protocol amongst modern browser vendors has been great, recent discoveries found that the WebSocket protocol is vulnerable to attacks. Adam Barth <a href="http://www.ietf.org/mail-archive/web/hybi/current/msg04744.html">demonstrated some serious attacks against the protocol</a> that could be used by an attacker to poison caches that sit in between the browser and the Internet. As a result of this, major vendors including <a href="http://hacks.mozilla.org/2010/12/websockets-disabled-in-firefox-4">Mozilla and Opera disabled WebSockets functionality by default</a> to protect users until the protocol is fixed. However, at the time of writing, the protocol has now been patched and no doubt vendors will implement the changes and re-enable the protocol by default soon.</p>
       </div>
 
@@ -182,7 +182,31 @@ websocket.onmessage = function(event) {
         <p>Socket.IO appears to be the most mature of the selection, offering complete abstraction for both client and server-side code, as well as degradation to a wide selection of technologies. Obviously, the fallbacks will be of no match to native WebSocket support- but they are a promising solution for developers who need that backwards compatibility.</p>
       </div>
 
-      <div id="action">
+      <div id="examples">
+        <h2>Examples</h2>
+
+        <p>The following examples I have created to demonstrate the basic functionality of WebSockets, they are for the most part written in raw JavaScript with the occasional dash of <a href="http://jquery.com">jQuery</a> and <a href="http://nodejs.org">Node.js</a> server-side. All <a href="https://github.com/stevelacey/websocket-examples">source code is available on Github</a>.</p>
+
+        <ul>
+          <li>
+            <a href="chat">Chat</a>
+            <p>A basic anonymous multi-user chat relay via WebSockets.</p>
+          </li>
+          <li>
+            <a href="date">Date</a>
+            <p>A script that pushes the current server datetime out to connected clients.</p>
+          </li>
+          <li>
+            <a href="echo">Echo</a>
+            <p>An echo responder.</p>
+          </li>
+        </ul>
+
+          <p>The 'chat' and 'date' servers reside on port 8081 and 8082 respectively; ports of which are blocked on the UWE campus.</p>
+          <p>The echo example's server is hosted by <a href="http://websocket.org/echo.html">websocket.org</a> on port 80, and should work through the proxy.</p>
+      </div>
+
+      <div id="websockets-in-action">
         <h2>WebSockets in Action</h2>
 
         <p>The following websites demonstrate the use of WebSockets in production environments, for a wide range of applications including massively multiplayer gaming, sketching and multiuser synchronising of data.</p>
@@ -217,31 +241,6 @@ websocket.onmessage = function(event) {
             <p>A massively multiplayer online Scrabble-like word game.</p>
           </li>
         </ul>
-      </div>
-
-      <div id="examples">
-        <h2>Examples</h2>
-
-        <p>The following examples I have created to demonstrate the basic functionality of WebSockets, they are for the most part written in raw JavaScript with the occasional dash of <a href="http://jquery.com">jQuery</a> and <a href="http://nodejs.org">Node.js</a> server-side. All <a href="https://github.com/stevelacey/websocket-examples">source code is available on Github</a>.</p>
-
-        <ul>
-          <li>
-            <a href="chat">Chat</a>
-            <p>A basic anonymous multi-user chat relay via WebSockets.</p>
-          </li>
-          <li>
-            <a href="date">Date</a>
-            <p>A script that pushes the current server datetime out to connected clients.</p>
-          </li>
-          <li>
-            <a href="echo">Echo</a>
-            <p>An echo responder.</p>
-          </li>
-        </ul>
-
-          <p>The 'chat' and 'date' servers reside on port 8081 and 8082 respectively; ports of which are blocked on the UWE campus.</p>
-          <p>The echo example's server is hosted by <a href="http://websocket.org/echo.html">websocket.org</a> on port 80, and should work through the proxy.</p>
-        </p>
       </div>
 
       <div id="evaluation">
