@@ -14,7 +14,7 @@ $(function() {
     'centerOnScroll': true,
     'hideOnContentClick': false
   });
-
+  
   if(!Modernizr.websockets) {
     $('#action h2, #examples h2').after($('<p/>', {
       'html': 'Oh no, you need a browser that supports WebSockets. How about <a href="http://www.google.com/chrome">Google Chrome</a>?',
@@ -22,9 +22,17 @@ $(function() {
     }));
   }
 
-  $.localScroll({speed: 300});
+  function highlight(id) {
+    $(id).effect("highlight", {color: "orange"}, 1000);
+  }
+
+  if (document.location.hash) {
+    highlight(document.location.hash);
+  }
 
   $(".nav a").click(function(event) {
-    $($(this).attr("href")).effect("highlight", {color: "orange"}, 1000);
+    highlight($(this).attr("href"));
   });
+
+  $.localScroll({hash: true, speed: 300});
 });
