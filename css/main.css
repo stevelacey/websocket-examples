@@ -131,7 +131,7 @@ pre, tt, code {
 }
 
 /* float clearing for everyone else */
-.report div:after{
+.report > div:after{
   clear: both;
   content: ".";
   display: block;

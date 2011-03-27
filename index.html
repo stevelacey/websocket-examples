@@ -54,10 +54,10 @@
         
         <blockquote cite="http://dev.w3.org/html5/websockets" title="The WebSocket API Editor's Draft">
           <p>This specification defines an API that enables Web pages to use the WebSocket protocol for two-way communication with a remote host.</p>
-          <span class="cite">
+          <div class="cite">
             This quotation was taken on 24th March 2011 from
             <cite><a href="http://dev.w3.org/html5/websockets">The WebSocket API Editor's Draft</a>.</cite>
-          </span>
+          </div>
         </blockquote>
 
         <p>The JavaScript added as part of the HTML5 specification allows for fairly simple use of the WebSocket protocol by developers. Amongst read-only connection details such as 'url', 'protocol' and 'readyState' the WebSocket interface defines four event handlers and two methods:</p>
@@ -103,7 +103,7 @@ websocket.onmessage = function(event) {
 
       <div id="server-side">
         <h2>Server-Side</h2>
-        <p>WebSocket servers are also relatively simple to set up. There is a vast collection of libraries, frameworks and even some native support spanning languages including:</p>
+        <p>WebSocket servers are also relatively simple to set up. There is a vast collection of libraries, frameworks and even some native support divning languages including:</p>
 
         <ul>
           <li>C</li>
@@ -119,10 +119,10 @@ websocket.onmessage = function(event) {
         <blockquote cite="http://static.brandedcode.com/nws-docs" title="Node WebSocket Server">
           <p>Node WebSocket Server is a near specification compliant implementation of the server-side <a href="http://static.brandedcode.com/nws-docs">WebSocket Protocol</a>. It is built on top of <a href="http://nodejs.org">Node.js</a> as a third-party module, and is designed to support various versions of the WebSocket protocol – which is currently still an IETF Draft.</p>
 
-          <span class="cite">
+          <div class="cite">
             This quotation was taken on 26th March 2011 from
             <cite><a href="http://static.brandedcode.com/nws-docs">Node WebSocket Server</a>.</cite>
-          </span>
+          </div>
         </blockquote>
 
         <p>The server's main roles amongst other things are to accept (or reject) clients, maintain a unique identifier for each connection and to listen for and broadcast messages, the core concept being in to manage the rapid exchange of data between nodes.</p>
@@ -140,10 +140,10 @@ websocket.onmessage = function(event) {
         <blockquote cite="http://remysharp.com/2010/10/08/what-is-a-polyfill" title="What is a Polyfill?">
           <p>A polyfill, or polyfiller, is a piece of code (or plugin) that provides the technology that you, the developer, expect the browser to provide natively. Flattening the API landscape if you will.</p>
 
-          <span class="cite">
+          <div class="cite">
             This quotation was taken on 27th March 2011 from
             <cite><a href="http://remysharp.com/2010/10/08/what-is-a-polyfill">What is a Polyfill?</a> by <a href="http://remysharp.com">Remy Sharp</a>.</cite>
-          </span>
+          </div>
         </blockquote>
 
         <p>The basic premise being that those who need to degrade this functionality can write or utilise a wrapper library that makes use of the in-built WebSocket functionality when it is available natively, and reverts to one of the techniques designed for the last generation of browsers when it is not; such as long polling or FlashSockets.</p>
