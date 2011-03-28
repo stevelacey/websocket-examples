@@ -1,6 +1,27 @@
 article {
+  background: #FFF;
   display: block;
   position: absolute;
-  width: 300px;
-  height: 60px;
+  width: 200px;
+  padding: 2px 5px;
+  font-size: 10px;
+  line-height: 16px;
+  -webkit-box-shadow: 0 0 50px #EEE;
+  -moz-box-shadow: 0 0 50px #EEE;
+  -o-box-shadow: 0 0 50px #EEE;
+  -ms-box-shadow: 0 0 50px #EEE;
+  box-shadow: 0 0 50px #EEE;
+}
+
+article a {
+  display: block;
+  position: relative;
+}
+
+article a img {
+  position: absolute;
+  top: 0;
+  left: -60px;
+  width: 48px;
+  height: 48px;
 }

@@ -3,18 +3,9 @@ $(document).ready(function(){
   ws.onmessage = function(evt) {
     data = eval("(" + evt.data + ")");
 
-    // vary size for fun
-    var divsize = ((Math.random()*100) + 50).toFixed();
-    var color = '#'+ Math.round(0xffffff * Math.random()).toString(16);
-    $newdiv = $('<div/>').css({
-        'width':divsize+'px',
-        'height':divsize+'px',
-        'background-color': color
-    });
-
     // make position sensitive to size and document's width
-    var x = (Math.random() * ($(document).width() - divsize)).toFixed();
-    var y = (Math.random() * ($(document).height() - divsize)).toFixed();
+    var x = (Math.random() * ($(document).width() - 200)).toFixed();
+    var y = (Math.random() * ($(document).height() - 50)).toFixed();
 
     $('body').prepend(
       $('<article/>', {'css': {'display': 'none', 'left': x + 'px', 'top': y + 'px'}}).append(
@@ -29,7 +20,7 @@ $(document).ready(function(){
     );
 
     if($('body article').size() > 15) {
-      $('body article:last').fadeOut(200, function() {
+      $('body article:gt(20)').fadeOut(200, function() {
         $(this).remove();
       });
     }
