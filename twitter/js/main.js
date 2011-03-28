@@ -4,8 +4,8 @@ $(document).ready(function(){
     data = eval("(" + evt.data + ")");
 
     // make position sensitive to size and document's width
-    var x = (Math.random() * ($(document).width() - 200)).toFixed();
-    var y = (Math.random() * ($(document).height() - 50)).toFixed();
+    var x = (Math.random() * ($(document).width() - 230)).toFixed();
+    var y = (Math.random() * ($(document).height() - 100)).toFixed();
 
     $('body').prepend(
       $('<article/>', {'css': {'display': 'none', 'left': x + 'px', 'top': y + 'px'}}).append(
@@ -19,8 +19,8 @@ $(document).ready(function(){
       ).fadeIn(200)
     );
 
-    if($('body article').size() > 15) {
-      $('body article:gt(20)').fadeOut(200, function() {
+    if($('body article').size() > 10) {
+      $('body article:gt(10)').fadeOut(200, function() {
         $(this).remove();
       });
     }
